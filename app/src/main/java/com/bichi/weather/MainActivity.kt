@@ -1,6 +1,5 @@
 package com.bichi.weather
 
-//import com.bichi.weather.viewmodels.FactoryModel
 import android.Manifest
 import android.content.Context
 import android.content.Intent
@@ -66,6 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         mainViewMode.getDbData().observe(this, Observer {
             Log.d(TAG, "observeData: $it")
+
             it?.let {
                 var sb = StringBuilder()
                 for (weather in it) {
