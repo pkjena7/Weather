@@ -69,12 +69,12 @@ class MainActivity : AppCompatActivity() {
             it?.let {
                 var sb = StringBuilder()
                 for (weather in it) {
-                    sb.append("Coordinates: Lat ${weather.coord.lat} Lng ${weather.coord.lon} \n")
-                    sb.append("Temp: Min ${weather.main.tempMin} Max ${weather.main.tempMax} humidity ${weather.main.humidity}\n")
+                    sb.append("Coordinates: Latitude ${weather.coord.lat}, Longitude ${weather.coord.lon}\n\n")
+                    sb.append("Temp: Min: ${weather.main.tempMin}, Max: ${weather.main.tempMax}, humidity: ${weather.main.humidity}\n\n")
                     //sb.append("Weather condition ${it.weather[0].main}\n")
-                    sb.append("Wind speed ${weather.wind.speed}\n")
-                    sb.append("Description ${weather.weather[0].description}")
-                    sb.append("Place ${weather.name} \n\n")
+                    sb.append("Wind speed: ${weather.wind.speed}\n\n")
+                    sb.append("Description: ${weather.weather[0].description}\n\n")
+                    sb.append("Place: ${weather.name} \n\n")
                 }
                 text.text = "$sb"
             }
