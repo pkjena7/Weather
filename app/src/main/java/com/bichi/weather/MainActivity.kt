@@ -7,11 +7,13 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
@@ -21,6 +23,10 @@ import com.bichi.weather.viewmodels.MainViewModel
 import com.google.android.gms.location.*
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -61,10 +67,14 @@ class MainActivity : AppCompatActivity() {
         mainViewMode.getWeatherData(location+",IN")
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun observeData() {
 
         mainViewMode.getDbData().observe(this, Observer {
             Log.d(TAG, "observeData: $it")
+
+            val date = LocalDate.now();
+            val time = LocalTime.now();
 
             it?.let {
                 var sb = StringBuilder()
@@ -75,6 +85,8 @@ class MainActivity : AppCompatActivity() {
                     sb.append("Wind speed: ${weather.wind.speed}\n\n")
                     sb.append("Description: ${weather.weather[0].description}\n\n")
                     sb.append("Place: ${weather.name} \n\n")
+                    sb.append("Date: ${date}\n\n")
+                    sb.append("Time : ${time}\n\n")
                 }
                 text.text = "$sb"
             }
