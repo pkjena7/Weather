@@ -32,10 +32,10 @@ val networkModule = module {
     fun provideRetrofit(baseUrl: String): Retrofit {
 
         return Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
     }
 
     single {
@@ -49,12 +49,12 @@ val databaseModule = module {
     fun provideDatabase(application: Application): Db {
 
         return Room.databaseBuilder(application, Db::class.java, DB_NAME)
-                .fallbackToDestructiveMigration()
-                .build()
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     fun provideCountriesDao(database: Db): WeatherDao {
-        return  database.getWeatherDao()
+        return database.getWeatherDao()
     }
 
     single { provideDatabase(androidApplication()) }
@@ -83,7 +83,7 @@ val viewModelModule = module {
 
     // Specific viewModel pattern to tell Koin how to build CountriesViewModel
     viewModel {
-        MainViewModel(weatherRepo = get(),databaseRepo = get())
+        MainViewModel(weatherRepo = get(), databaseRepo = get())
     }
 
 }

@@ -10,15 +10,15 @@ import com.bichi.weather.models.Weather
 
 @Database(entities = [Weather::class], version = DB_VERSION)
 @TypeConverters(Convoter::class)
-abstract class Db : RoomDatabase(){
-    abstract fun getWeatherDao():WeatherDao
+abstract class Db : RoomDatabase() {
+    abstract fun getWeatherDao(): WeatherDao
 
-    companion object{
+    companion object {
         @Volatile
-        private var databaseInstance : Db ?= null
+        private var databaseInstance: Db? = null
 
-        fun getDatabaseInstance(mContext: Context):Db =
-            databaseInstance ?: synchronized(this){
+        fun getDatabaseInstance(mContext: Context): Db =
+            databaseInstance ?: synchronized(this) {
                 databaseInstance ?: buildDatabaseInstance(mContext).also {
                     databaseInstance = it
                 }
@@ -30,5 +30,6 @@ abstract class Db : RoomDatabase(){
                 .build()
     }
 }
+
 const val DB_VERSION = 4
 const val DB_NAME = "PersonDataSample.db"

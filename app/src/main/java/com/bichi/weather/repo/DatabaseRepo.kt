@@ -9,14 +9,14 @@ import io.reactivex.Single
 class DatabaseRepo(private val weatherDao: WeatherDao) {
 
     fun getWeatherData(): LiveData<List<Weather>> {
-      return weatherDao.getData()
+        return weatherDao.getData()
     }
 
     fun insert(weather: Weather): Single<Long> {
         return weatherDao.insertWeather(weather)
     }
 
-    suspend fun deleteAll(){
+    suspend fun deleteAll() {
         weatherDao.deleteAll()
     }
 }

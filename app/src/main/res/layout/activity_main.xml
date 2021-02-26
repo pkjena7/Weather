@@ -25,8 +25,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="City Name"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,8 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Country Code"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -55,19 +55,19 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
     <ScrollView
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="0dp"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/button">
 
         <TextView
             android:id="@+id/text"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textStyle="bold" />
 
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

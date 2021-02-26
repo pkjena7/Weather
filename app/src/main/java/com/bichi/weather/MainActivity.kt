@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initViewModel(){
+    private fun initViewModel() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         //RequestPermission()
         statusCheck()
@@ -59,13 +59,13 @@ class MainActivity : AppCompatActivity() {
     fun statusCheck() {
         val manager = getSystemService(LOCATION_SERVICE) as LocationManager
         if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            startActivityForResult(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS),10);
+            startActivityForResult(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), 10);
         }
     }
 
     private fun getData(location: String) {
         Log.d(TAG, "location: " + location)
-        mainViewMode.getWeatherData(location+",IN")
+        mainViewMode.getWeatherData(location + ",IN")
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun RequestPermission(){
+    fun RequestPermission() {
 
         //this function will allows us to tell the user to requesut the necessary permsiion if they are not garented
         ActivityCompat.requestPermissions(
@@ -107,7 +107,8 @@ class MainActivity : AppCompatActivity() {
             PERMISSION_ID
         )
     }
-    fun isLocationEnabled():Boolean{
+
+    fun isLocationEnabled(): Boolean {
         //this function will return to us the state of the location service
         //if the gps or the network provider is enabled then it will return true otherwise it will return false
         var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -115,8 +116,9 @@ class MainActivity : AppCompatActivity() {
             LocationManager.NETWORK_PROVIDER
         )
     }
-    fun CheckPermission():Boolean{
-        if(
+
+    fun CheckPermission(): Boolean {
+        if (
             ActivityCompat.checkSelfPermission(
                 this,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION
@@ -125,7 +127,7 @@ class MainActivity : AppCompatActivity() {
                 this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
-        ){
+        ) {
             return true
         }
 
@@ -133,13 +135,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    companion object{
-        val TAG :String= MainActivity::class.java.simpleName
+    companion object {
+        val TAG: String = MainActivity::class.java.simpleName
     }
 
-    fun getLastLocation(){
-        if(CheckPermission()){
-            if(isLocationEnabled()){
+    fun getLastLocation() {
+        if (CheckPermission()) {
+            if (isLocationEnabled()) {
                 if (ActivityCompat.checkSelfPermission(
                         this,
                         Manifest.permission.ACCESS_FINE_LOCATION
@@ -157,11 +159,11 @@ class MainActivity : AppCompatActivity() {
                     // for ActivityCompat#requestPermissions for more details.
                     return
                 }
-                fusedLocationProviderClient.lastLocation.addOnCompleteListener { task->
+                fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
                     var location: Location? = task.result
-                    if(location == null){
+                    if (location == null) {
                         NewLocationData()
-                    }else{
+                    } else {
                         Log.d("Debug:", "Your Location:" + location.longitude)
                         //textView.text = "You Current Location is : Long: "+ location.longitude + " , Lat: " + location.latitude + "\n" + getCityName(location.latitude,location.longitude)
                         /*Log.d(
@@ -171,19 +173,20 @@ class MainActivity : AppCompatActivity() {
                                 location.longitude
                             )
                         )*/
-                        getData(getCityName(location.latitude,location.longitude))
+                        getData(getCityName(location.latitude, location.longitude))
                     }
                 }
-            }else{
-                Toast.makeText(this, "Please Turn on Your device Location", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Please Turn on Your device Location", Toast.LENGTH_SHORT)
+                    .show()
             }
-        }else{
+        } else {
             RequestPermission()
         }
     }
 
-    fun NewLocationData(){
-        var locationRequest =  LocationRequest()
+    fun NewLocationData() {
+        var locationRequest = LocationRequest()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         locationRequest.interval = 0
         locationRequest.fastestInterval = 0
@@ -212,7 +215,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private val locationCallback = object : LocationCallback(){
+    private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             var lastLocation: Location = locationResult.lastLocation
             /*Log.d(
@@ -222,13 +225,17 @@ class MainActivity : AppCompatActivity() {
                     lastLocation.longitude
                 )
             )*/
-            getData(getCityName(lastLocation.latitude,
-                lastLocation.longitude))
+            getData(
+                getCityName(
+                    lastLocation.latitude,
+                    lastLocation.longitude
+                )
+            )
         }
     }
 
-    private fun getCityName(lat: Double, long: Double):String{
-        var cityName:String = ""
+    private fun getCityName(lat: Double, long: Double): String {
+        var cityName: String = ""
         var countryName = ""
         var geoCoder = Geocoder(this, Locale.getDefault())
         var Adress = geoCoder.getFromLocation(lat, long, 3)

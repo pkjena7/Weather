@@ -6,15 +6,15 @@ import com.google.gson.Gson
 
 class Convoter {
     @TypeConverter
-    fun listToJson(data:List<WeatherX>): String? {
+    fun listToJson(data: List<WeatherX>): String? {
         data.let {
             return Gson().toJson(it)
         }
     }
 
     @TypeConverter
-    fun jsonToList(data:String): List<WeatherX>? {
-        val objects = Gson().fromJson(data,Array<WeatherX>::class.java)
+    fun jsonToList(data: String): List<WeatherX>? {
+        val objects = Gson().fromJson(data, Array<WeatherX>::class.java)
         return objects?.toList()
     }
 }

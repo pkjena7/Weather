@@ -11,12 +11,12 @@ import io.reactivex.Single
 
 
 @Dao
-interface WeatherDao{
+interface WeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertWeather(data: Weather):Single<Long>
+    fun insertWeather(data: Weather): Single<Long>
 
     @Query("select * from weather")
-    fun getData():LiveData<List<Weather>>
+    fun getData(): LiveData<List<Weather>>
 
     @Query("delete from weather")
     suspend fun deleteAll()

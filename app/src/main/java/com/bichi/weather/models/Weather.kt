@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "weather")
 data class Weather(
     @PrimaryKey(autoGenerate = true)
-    val id:Int?=null,
+    val id: Int? = null,
     @Embedded
     val coord: Coord,
     @Embedded

@@ -7,5 +7,5 @@ import retrofit2.http.QueryMap
 
 interface WeatherService {
     @GET("weather")
-    fun getWeatherData(@QueryMap paramsMap:Map<String, String>):Observable<Weather>
+    fun getWeatherData(@QueryMap paramsMap: Map<String, String>): Observable<Weather>
 }
