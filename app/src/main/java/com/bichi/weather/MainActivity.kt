@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var locationRequest: LocationRequest
     val PERMISSION_ID = 1010
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
